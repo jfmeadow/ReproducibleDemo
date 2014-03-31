@@ -22,8 +22,8 @@ Data used here are from a subset of the 16S Illumina MiSeq dataset used in Meado
 #### Install necessary software: 
 
 * R: All statistical analysis is done in R. Install the latest version here: [http://cran.us.r-project.org/](http://cran.us.r-project.org/)
-* RStudio: This is not technically necessary, but RStudio has fully integrated the knitr workflow described here, so it makes life easier. 
-* MacQIIME: Only necessary if you desire to also reproduce sequence processing steps. If you do not install QIIME or MacQIIME, just skip this step and go straight to RStudio for analysis. 
+* RStudio: This is not technically necessary, but RStudio has fully integrated the knitr workflow described here, so it makes life easier. Find it free here: [https://www.rstudio.com/](https://www.rstudio.com/)
+* MacQIIME: Only necessary if you desire to also reproduce sequence processing steps. If you do not install QIIME or MacQIIME, just skip this step and go straight to RStudio for analysis. If you use QIIME through a server, on Linux, or through a virtual box, you will have to edit the `pickTheseOTUs.sh` script to point to your GreenGenes resources. Install MacQIIME here: [http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)
 * phyloseq: a BioConductor package designed to gracefully bring QIIME data into R. This is not a CRAN package, so you'll need to run two lines of code in your R terminal: 
 
        source("http://bioconductor.org/biocLite.R")
@@ -35,7 +35,7 @@ This will install the phyloseq package. When it asks you to update other depende
   * vegan: ecological multivariate statistics.
   * labdsv: a few more really useful ecology functions. 
   * xtable: converts tables from R to other formats (including LaTeX and HTML).
-* Mou - or any markdown editor. If you are new to markdown, this is a really easy clean free editor that is useful for learning the syntax. this document, for example, can be opened and read in Mou. It is only available for mac, but there are many free options for all platforms, and they all work about the same. 
+* Mou - or any markdown editor. If you are new to markdown, this is a really easy clean free editor that is useful for learning the syntax. this document, for example, can be opened and read in Mou. It is only available for mac, but there are many free options for all platforms, and they all work about the same. Download free here: [http://mouapp.com/](http://mouapp.com/)
 * LaTeX or some minimal LaTeX distribution: This is used to convert to final manuscript outputs. If you already have LaTeX on your machine, pandoc will likely be able to use it. If not, MacTeX is a really easy-to-install distribution for Mac, and it will do anything you need to do here. This is heavy-weight software, so it takes a few minutes to download. Find it here: [http://tug.org/mactex/](http://tug.org/mactex/). If you only want to produce markdown, html, or .docx formats, LaTeX is unnecessary. 
 
 

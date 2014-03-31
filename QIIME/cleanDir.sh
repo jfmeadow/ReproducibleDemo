@@ -2,7 +2,7 @@
 
 if [ -a otu_table.biom ];
 then
-echo "Do you want to replace the OTU-table-related files and folders?"
+echo "Do you want to remove the OTU-table-related files and folders? If yes, enter '1'."
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) 
