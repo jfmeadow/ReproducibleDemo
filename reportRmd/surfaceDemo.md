@@ -34,11 +34,11 @@ Load `phyloseq` to handle QIIME output files, and `vegan` and `labdsv` for multi
 
 ```r
 # setwd('~/Dropbox/SLP_Teaching/reportRmd')
-library(knitr)
-library(phyloseq)
-library(vegan)
-library(labdsv)
-library(xtable)
+require(knitr)
+require(phyloseq)
+require(vegan)
+require(labdsv)
+require(xtable)
 ```
 
 

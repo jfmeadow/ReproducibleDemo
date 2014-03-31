@@ -7,7 +7,7 @@ export fromPath=../manuscriptRmd/
 
 # update bib file - This is really useful when using a citation editor 
 #   like Mendeley that updates bib files when you manage citations. 
-cp ~/Documents/bib/$bibFile.bib .
+# cp ~/Documents/bib/$bibFile.bib .
 
 # copy figures from Rmd folder
 #   knitr generated these, and they will be included in the documents.

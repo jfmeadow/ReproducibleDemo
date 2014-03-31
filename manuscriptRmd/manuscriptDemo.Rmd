@@ -24,11 +24,11 @@ set.seed(42)
 ```
 
 ```{r loadPackages, message=FALSE}
-library(knitr)
-library(phyloseq)
-library(vegan)
-library(labdsv)
-library(xtable)
+require(knitr)
+require(phyloseq)
+require(vegan)
+require(labdsv)
+require(xtable)
 ```
 
 ```{r importPhyloseq}
@@ -140,7 +140,7 @@ topTaxa$RelAbu <- colSums(tab)[tops]/100
 kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
 ```
 
-```{r plotNMDS, fig.width=6, fig.height=5, fig.cap='Samples cluster by the type of surface.'}
+```{r plotNMDS, fig.width=6, fig.height=5, dpi=100, fig.cap='Samples cluster by the type of surface.'}
 par(mar=c(5,4,1,5), las=1, xpd=TRUE)
 plot(nmdsCanberra, pch=21, cex=2, bg=map$color)
 legend(par()$usr[2], par()$usr[4], pch=21, pt.cex=1.5,
