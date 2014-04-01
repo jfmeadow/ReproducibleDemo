@@ -8,6 +8,8 @@ Demo scripts to help learn a few reproducibility techniques combining R, markdow
 
 Data used here are from a subset of the 16S Illumina MiSeq dataset used in Meadow et al. (2014, [Microbiome 2:7](http://www.microbiomejournal.com/content/2/1/7)). That manuscript explored the bacterial communities present on indoor classroom surfaces, and reported that the way we interact with surfaces predicts the bacteria present on those surfaces. 
 
+This whole demo can be downloaded here: [https://github.com/jfmeadow/ReproducibleDemo](https://github.com/jfmeadow/ReproducibleDemo)
+
 ### Folders in this demo: 
 
 * `QIIME`: Scripts, data, and output from closed reference OTU picking on demultiplexed sequence data. This depends on MacQIIME (1.8). This folder already contains output, so there is no need to install MacQIIME or QIIME if you are only working through the R analysis. The output included in this folder is required for all further analyses. 
@@ -54,7 +56,12 @@ This will convert the `surfaceDemo.md` into pdf, LaTeX, and Word format. Since n
 * `manuscriptPandoc`: The final output - The manuscript analysis that was done in `manuscriptPandoc` is converted to .docx, as well as multiple different LaTeX pdf formats for different journals. Pandoc is capable of taking .bib citation files and inserting citations and creating a bibliography. Two different .csl files are included to format citations for our two imaginary target journals. Though these examples are spare, many many options exist for whatever output you can think of. 
 
 
+#### A few other ways to create reproducible analysis documents: 
 
+* Sweave: The original analysis/LaTeX integration. For producing really nice, complex dynamic documents. It comes with every R distribution. More info here: [http://www.stat.uni-muenchen.de/~leisch/Sweave/](http://www.stat.uni-muenchen.de/~leisch/Sweave/)
+* Pweave: Pretty much identical, but for python instead: [http://mpastell.com/pweave/](http://mpastell.com/pweave/)
+* Sweave and Pweave demo/comparison: [http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/](http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/)
+* IPython Notebooks: Very nice dynamic python documents. Very similar to what knitr does for R. [http://ipython.org/notebook.html](http://ipython.org/notebook.html)
 
 
 
