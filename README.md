@@ -53,15 +53,18 @@ This will ask if you want to replace the output that is already in there. If yes
         ./makeReport.sh
 This will convert the `surfaceDemo.md` into pdf, LaTeX, and Word format. Since not all collaborators want to learn markdown, it is often useful to output directly to .docx format. But for a nice, attractive document to turn in as homework or as a manuscript supplement, the LaTeX conversion might be best. The script is set up with several different options to make nice outputs. 
 * `manuscriptRmd`: Nearly identical analysis as was done in the `reportRmd`, but without the code output. The result here is a document that can be converted to submission-quality manuscript files. So instead of showing exactly the code that was entered, we see only the results we want to include in the manuscript. You will execute this the same way you did for `reportRmd`.
-* `manuscriptPandoc`: The final output - The manuscript analysis that was done in `manuscriptPandoc` is converted to .docx, as well as multiple different LaTeX pdf formats for different journals. Pandoc is capable of taking .bib citation files and inserting citations and creating a bibliography. Two different .csl files are included to format citations for our two imaginary target journals. Though these examples are spare, many many options exist for whatever output you can think of. 
+* `manuscriptPandoc`: The final output - The manuscript analysis that was done in `manuscriptPandoc` is converted to .docx, as well as multiple different LaTeX pdf formats for different journals. Pandoc is capable of taking .bib citation files and inserting citations and creating a bibliography. Two different .csl files are included to format citations for our two imaginary target journals. Though these examples are spare, many many options exist for whatever output you can think of. In this folder, create documents by running the shell script: 
+
+        ./makeManuscript.sh
 
 
-#### A few other ways to create reproducible analysis documents: 
+#### A few other resources for reproducible analysis documents: 
 
-* Sweave: The original analysis/LaTeX integration. For producing really nice, complex dynamic documents. It comes with every R distribution. More info here: [http://www.stat.uni-muenchen.de/~leisch/Sweave/](http://www.stat.uni-muenchen.de/~leisch/Sweave/)
-* Pweave: Pretty much identical, but for python instead: [http://mpastell.com/pweave/](http://mpastell.com/pweave/)
-* Sweave and Pweave demo/comparison: [http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/](http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/)
 * IPython Notebooks: Very nice dynamic python documents. Very similar to what knitr does for R. [http://ipython.org/notebook.html](http://ipython.org/notebook.html)
+* Sweave: The original analysis/LaTeX integration. For producing really nice, complex dynamic documents. It comes with every R distribution. More info here: [http://www.stat.uni-muenchen.de/~leisch/Sweave/](http://www.stat.uni-muenchen.de/~leisch/Sweave/)
+* Pweave: Pretty much identical to Sweave, but for python instead: [http://mpastell.com/pweave/](http://mpastell.com/pweave/)
+* Sweave and Pweave demo/comparison: [http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/](http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/)
+* Switching from Sweave to knitr: The knitr package has adopted many Sweave conventions and functionalities. This demo explains the transition: [http://yihui.name/knitr/demo/sweave/](http://yihui.name/knitr/demo/sweave/)
 
 
 
