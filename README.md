@@ -37,7 +37,7 @@ This will install the phyloseq package. When it asks you to update other depende
   * vegan: ecological multivariate statistics.
   * labdsv: a few more really useful ecology functions. 
   * xtable: converts tables from R to other formats (including LaTeX and HTML).
-* Mou - or any markdown editor. If you are new to markdown, this is a really easy clean free editor that is useful for learning the syntax. this document, for example, can be opened and read in Mou. It is only available for mac, but there are many free options for all platforms, and they all work about the same. Download free here: [http://mouapp.com/](http://mouapp.com/)
+* Mou - or any markdown editor. If you are new to markdown, this is a really easy clean free editor that is useful for learning the syntax. this document, for example, can be opened and read in Mou. It is only available for mac, but there are many free options for all platforms, and they all work about the same. Download free here: [http://mouapp.com/](http://mouapp.com/). You can learn all about markdown here: [https://daringfireball.net/projects/markdown/](https://daringfireball.net/projects/markdown/)
 * LaTeX or some minimal LaTeX distribution: This is used to convert to final manuscript outputs. If you already have LaTeX on your machine, pandoc will likely be able to use it. If not, MacTeX is a really easy-to-install distribution for Mac, and it will do anything you need to do here. This is heavy-weight software, so it takes a few minutes to download. Find it here: [http://tug.org/mactex/](http://tug.org/mactex/). If you only want to produce markdown, html, or .docx formats, LaTeX is unnecessary. 
 
 
@@ -62,7 +62,6 @@ This will convert the `surfaceDemo.md` into pdf, LaTeX, and Word format. Since n
 * Pweave: Pretty much identical, but for python instead: [http://mpastell.com/pweave/](http://mpastell.com/pweave/)
 * Sweave and Pweave demo/comparison: [http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/](http://www.johndcook.com/blog/2012/12/20/basics-of-sweave-and-pweave/)
 * IPython Notebooks: Very nice dynamic python documents. Very similar to what knitr does for R. [http://ipython.org/notebook.html](http://ipython.org/notebook.html)
-
 
 
 
