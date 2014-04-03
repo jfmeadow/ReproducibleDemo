@@ -16,7 +16,10 @@ The data used here are a small subset (first 20,000 quality-filtered sequences) 
 
 ### Methods
 
-This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQIIME installation ([http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)). Scripts for processing raw data are in the `../QIIME/` folder. To pick OTUs in that folder, you will execute the `pickTheseOTUs.sh` script sitting in that folder. This script wants to run MacQIIME, so if you are not using MacQIIME, you'll probably need to alter the top line. For statistical analyses, we primiarily used the `phyloseq` package to handle QIIME output files, and `vegan` and `labdsv` for multivariate ecology stats [@phyloseq; @vegan; @labdsv]. All sequences were rarefied to an equal sampling depth (100 sequences per sample) prior to analysis. Beta-diversity was calculated using the Canberra taxonomic metric. Reproducible documents were created with the `knitr` package in R [@knitr].
+This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQIIME installation ([http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)). Scripts for processing raw data are in the `../QIIME/` folder. To pick OTUs in that folder, you will execute the `pickTheseOTUs.sh` script sitting in that folder. This script wants to run MacQIIME, so if you are not using MacQIIME, you'll need to alter the top line to reflect your system. 
+
+For statistical analyses, we primiarily used the `phyloseq` package to handle QIIME output files, and `vegan` and `labdsv` for multivariate ecology stats [@phyloseq; @vegan; @labdsv]. All sequences were rarefied to an equal sampling depth (100 sequences per sample) prior to analysis. Beta-diversity was calculated using the Canberra taxonomic metric. The Canberra metric is defined as: $$ d_{jk} = \frac{1}{NZ} \sum \frac{x_{ij}-x_{ik}}{x_{ij}+x_{ik}} $$ where _NZ_ is the number of non-zero entries.  Reproducible documents were created with the `knitr` package in R [@knitr].
+
 
 
 
@@ -74,24 +77,40 @@ This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQ
 
 Out of a total 1.5923 &times; 10<sup>4</sup> sequences that passed quality filtering, we analyzed 5800 sequences in 58 samples distributed among 966 OTUs (97% sequence similarity). The most abundant OTU in the dataset was a Cyanobacterium (2.67% of all sequences). The most abundant taxa are shown in Table 1. \pagebreak
 
-|id       |Phylum          |Family              |Genus            |Species      |  RelAbu|
-|:--------|:---------------|:-------------------|:----------------|:------------|-------:|
-|505954   |Cyanobacteria   |Xenococcaceae       |-                |-            |    1.55|
-|1039477  |Firmicutes      |Staphylococcaceae   |Staphylococcus   |epidermidis  |    1.46|
-|4449609  |Proteobacteria  |Sphingomonadaceae   |Sphingomonas     |-            |    1.39|
-|359689   |Actinobacteria  |Corynebacteriaceae  |Corynebacterium  |-            |    1.25|
-|4482309  |Proteobacteria  |Acetobacteraceae    |-                |-            |    1.24|
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllllr}
+  \hline
+ & Phylum & Family & Genus & Species & RelAbu \\ 
+  \hline
+505954 & Cyanobacteria & Xenococcaceae & - & - & 2.67 \\ 
+  1039477 & Firmicutes & Staphylococcaceae & Staphylococcus & epidermidis & 2.52 \\ 
+  4449609 & Proteobacteria & Sphingomonadaceae & Sphingomonas & - & 2.40 \\ 
+  359689 & Actinobacteria & Corynebacteriaceae & Corynebacterium & - & 2.16 \\ 
+  4482309 & Proteobacteria & Acetobacteraceae & - & - & 2.14 \\ 
+   \hline
+\end{tabular}
+\caption{Most abundant taxa across all surfaces.} 
+\end{table}
 
 
 ![Samples cluster by the type of surface.](figure/plotNMDS.png) 
 
 
 
-|id               |  Df|  SumsOfSqs|MeanSqs            |F.Model        |       R2|Pr(>F)  |
-|:----------------|---:|----------:|:------------------|:--------------|--------:|:-------|
-|map$SurfaceType  |   3|      2.135|0.711675589506437  |1.79674428227  |  0.09076|0.001   |
-|Residuals        |  54|     21.389|0.396091751357774  |               |  0.90924|        |
-|Total            |  57|     23.524|                   |               |  1.00000|        |
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrrrr}
+  \hline
+ & Df & SumsOfSqs & MeanSqs & F.Model & R2 & Pr($>$F) \\ 
+  \hline
+map\$SurfaceType & 3 & 2.14 & 0.71 & 1.80 & 0.09 & 0.001 \\ 
+  Residuals & 54 & 21.39 & 0.40 &  & 0.91 &  \\ 
+  Total & 57 & 23.52 &  &  & 1.00 &  \\ 
+   \hline
+\end{tabular}
+\caption{Surface type explains a significant amount of variation among communities.} 
+\end{table}
 
 
 
@@ -114,6 +133,7 @@ We did not find any significant coorelation between community similarity and spa
 So it looks like the type of surface, potentially as a proxy for human contact, explains a significant amount of variation, in the microbial communities on those surfaces, but their proximity to each other around the room doesn't seem to matter at all. 
 
 
+\clearpage
 
 ----------------
 

@@ -16,7 +16,10 @@ The data used here are a small subset (first 20,000 quality-filtered sequences) 
 
 ### Methods
 
-This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQIIME installation ([http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)). Scripts for processing raw data are in the `../QIIME/` folder. To pick OTUs in that folder, you will execute the `pickTheseOTUs.sh` script sitting in that folder. This script wants to run MacQIIME, so if you are not using MacQIIME, you'll probably need to alter the top line. For statistical analyses, we primiarily used the `phyloseq` package to handle QIIME output files, and `vegan` and `labdsv` for multivariate ecology stats [@phyloseq; @vegan; @labdsv]. All sequences were rarefied to an equal sampling depth (100 sequences per sample) prior to analysis. Beta-diversity was calculated using the Canberra taxonomic metric. Reproducible documents were created with the `knitr` package in R [@knitr].
+This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQIIME installation ([http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)). Scripts for processing raw data are in the `../QIIME/` folder. To pick OTUs in that folder, you will execute the `pickTheseOTUs.sh` script sitting in that folder. This script wants to run MacQIIME, so if you are not using MacQIIME, you'll need to alter the top line to reflect your system. 
+
+For statistical analyses, we primiarily used the `phyloseq` package to handle QIIME output files, and `vegan` and `labdsv` for multivariate ecology stats [@phyloseq; @vegan; @labdsv]. All sequences were rarefied to an equal sampling depth (100 sequences per sample) prior to analysis. Beta-diversity was calculated using the Canberra taxonomic metric. The Canberra metric is defined as: $$ d_{jk} = \frac{1}{NZ} \sum \frac{x_{ij}-x_{ik}}{x_{ij}+x_{ik}} $$ where _NZ_ is the number of non-zero entries.  Reproducible documents were created with the `knitr` package in R [@knitr].
+
 
 ```{r setSeed}
 # setwd('~/Dropbox/SLP_Teaching/manuscriptRmd')
@@ -66,7 +69,7 @@ for (i in 1:ncol(surfaceTaxa)) {
 # identical(sort(row.names(surfaceMap)), sort(row.names(surfaceTable)))
 ```
 
-```{r removeUnwanted, echo=FALSE, eval=TRUE}
+```{r removeUnwanted, eval=TRUE}
 # dim(surfaceTaxa)
 surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', surfaceTaxa$Family)), ]
 surfaceTaxa <- surfaceTaxa[-c(grep('Chloroplast', surfaceTaxa$Class)), ]
@@ -135,9 +138,11 @@ Out of a total `r sum(surfaceTable)` sequences that passed quality filtering, we
 ```{r mostAbundant, results='asis', }
 tops <- names(sort(colSums(tab), decreasing=TRUE)[1:5])
 topTaxa <- taxa[tops, c(2, 5:7)]
-topTaxa$RelAbu <- colSums(tab)[tops]/100
-# print(xtable(topTaxa))  # a way to make better LaTeX tables with more options
-kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
+topTaxa$RelAbu <- colSums(tab)[tops]/sum(tab)*100
+# kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
+print(xtable(topTaxa, 
+  caption='Most abundant taxa across all surfaces.'), 
+  comment=FALSE, timestamp=FALSE)  # a way to make better LaTeX tables with more options
 ```
 
 ```{r plotNMDS, fig.width=6, fig.height=5, dpi=100, fig.cap='Samples cluster by the type of surface.'}
@@ -151,11 +156,11 @@ legend(par()$usr[2], par()$usr[4], pch=21, pt.cex=1.5,
 
 ```{r surfaceTypeModel, results='asis'}
 surfaceTypeModel <- adonis(distCanberra ~ map$SurfaceType)$aov.tab
-# names(surfaceTypeModel)
-# print(xtable(surfaceTypeModel))
-# surfaceTypeModel
-surfaceTypeModel[is.na(surfaceTypeModel)] <- ''
-kable(surfaceTypeModel)
+# kable(surfaceTypeModel)  # good for markdown tables
+# the better way for latex tables
+print(xtable(surfaceTypeModel, digits=c(0, 0, 2, 2, 2, 2, 3),
+  caption='Surface type explains a significant amount of variation among communities.'), 
+  comment=FALSE, timestamp=FALSE) 
 ```
 
 
@@ -195,6 +200,7 @@ We did not find any significant coorelation between community similarity and spa
 So it looks like the type of surface, potentially as a proxy for human contact, explains a significant amount of variation, in the microbial communities on those surfaces, but their proximity to each other around the room doesn't seem to matter at all. 
 
 
+\clearpage
 
 ----------------
 

@@ -1,5 +1,5 @@
 # Reproducible Microbiome Analysis
-### created by: James F Meadow (jfmeadow@gmail.com)
+### created by: James F Meadow (jfmeadow at gmail dot com)
 ### date: 2014 March 29
 
 -----------

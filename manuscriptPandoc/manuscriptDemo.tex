@@ -27,14 +27,19 @@ default MacQIIME installation
 processing raw data are in the \texttt{../QIIME/} folder. To pick OTUs
 in that folder, you will execute the \texttt{pickTheseOTUs.sh} script
 sitting in that folder. This script wants to run MacQIIME, so if you are
-not using MacQIIME, you'll probably need to alter the top line. For
-statistical analyses, we primiarily used the \texttt{phyloseq} package
-to handle QIIME output files, and \texttt{vegan} and \texttt{labdsv} for
-multivariate ecology stats {[}@phyloseq; @vegan; @labdsv{]}. All
-sequences were rarefied to an equal sampling depth (100 sequences per
-sample) prior to analysis. Beta-diversity was calculated using the
-Canberra taxonomic metric. Reproducible documents were created with the
-\texttt{knitr} package in R {[}@knitr{]}.
+not using MacQIIME, you'll probably need to alter the top line to
+reflect your system.
+
+For statistical analyses, we primiarily used the \texttt{phyloseq}
+package to handle QIIME output files, and \texttt{vegan} and
+\texttt{labdsv} for multivariate ecology stats {[}@phyloseq; @vegan;
+@labdsv{]}. All sequences were rarefied to an equal sampling depth (100
+sequences per sample) prior to analysis. Beta-diversity was calculated
+using the Canberra taxonomic metric. The Canberra metric is defined as:
+\[ d_{jk} = \frac{1}{NZ} \sum \frac{x_{ij}-x_{ik}}{x_{ij}+x_{ik}} \]
+where \emph{NZ} is the number of non-zero entries. Reproducible
+documents were created with the \texttt{knitr} package in R
+{[}@knitr{]}.
 
 \subsubsection{Results}
 
@@ -44,25 +49,21 @@ sequence similarity). The most abundant OTU in the dataset was a
 Cyanobacterium (2.67\% of all sequences). The most abundant taxa are
 shown in Table 1. \pagebreak
 
-\begin{longtable}[c]{@{}lllllr@{}}
-\hline\noalign{\medskip}
-id & Phylum & Family & Genus & Species & RelAbu
-\\\noalign{\medskip}
-\hline\noalign{\medskip}
-505954 & Cyanobacteria & Xenococcaceae & - & - & 1.55
-\\\noalign{\medskip}
-1039477 & Firmicutes & Staphylococcaceae & Staphylococcus & epidermidis
-& 1.46
-\\\noalign{\medskip}
-4449609 & Proteobacteria & Sphingomonadaceae & Sphingomonas & - & 1.39
-\\\noalign{\medskip}
-359689 & Actinobacteria & Corynebacteriaceae & Corynebacterium & - &
-1.25
-\\\noalign{\medskip}
-4482309 & Proteobacteria & Acetobacteraceae & - & - & 1.24
-\\\noalign{\medskip}
-\hline
-\end{longtable}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllllr}
+  \hline
+ & Phylum & Family & Genus & Species & RelAbu \\ 
+  \hline
+505954 & Cyanobacteria & Xenococcaceae & - & - & 2.67 \\ 
+  1039477 & Firmicutes & Staphylococcaceae & Staphylococcus & epidermidis & 2.52 \\ 
+  4449609 & Proteobacteria & Sphingomonadaceae & Sphingomonas & - & 2.40 \\ 
+  359689 & Actinobacteria & Corynebacteriaceae & Corynebacterium & - & 2.16 \\ 
+  4482309 & Proteobacteria & Acetobacteraceae & - & - & 2.14 \\ 
+   \hline
+\end{tabular}
+\caption{Most abundant taxa across all surfaces.} 
+\end{table}
 
 \begin{figure}[htbp]
 \centering
@@ -70,20 +71,19 @@ id & Phylum & Family & Genus & Species & RelAbu
 \caption{Samples cluster by the type of surface.}
 \end{figure}
 
-\begin{longtable}[c]{@{}lrrllrl@{}}
-\hline\noalign{\medskip}
-id & Df & SumsOfSqs & MeanSqs & F.Model & R2 & Pr(\textgreater{}F)
-\\\noalign{\medskip}
-\hline\noalign{\medskip}
-map\$SurfaceType & 3 & 2.135 & 0.711675589506437 & 1.79674428227 &
-0.09076 & 0.001
-\\\noalign{\medskip}
-Residuals & 54 & 21.389 & 0.396091751357774 & & 0.90924 &
-\\\noalign{\medskip}
-Total & 57 & 23.524 & & & 1.00000 &
-\\\noalign{\medskip}
-\hline
-\end{longtable}
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrrrr}
+  \hline
+ & Df & SumsOfSqs & MeanSqs & F.Model & R2 & Pr($>$F) \\ 
+  \hline
+map\$SurfaceType & 3 & 2.14 & 0.71 & 1.80 & 0.09 & 0.001 \\ 
+  Residuals & 54 & 21.39 & 0.40 &  & 0.91 &  \\ 
+  Total & 57 & 23.52 &  &  & 1.00 &  \\ 
+   \hline
+\end{tabular}
+\caption{Surface type explains a significant amount of variation among communities.} 
+\end{table}
 
 We found that surface type explained a significant amount of community
 variation (p = 0.001; from PERMANOVA on Canberra distances).
@@ -109,6 +109,8 @@ So it looks like the type of surface, potentially as a proxy for human
 contact, explains a significant amount of variation, in the microbial
 communities on those surfaces, but their proximity to each other around
 the room doesn't seem to matter at all.
+
+\clearpage
 
 \begin{center}\rule{3in}{0.4pt}\end{center}
 
