@@ -167,30 +167,14 @@ Add up observations in each sample. For analysis like this, we should rarefy to 
 
 
 ```r
-sort(rowSums(surfaceTable), decreasing=FALSE)
+c(head(sort(rowSums(surfaceTable))), tail(sort(rowSums(surfaceTable))))
 ```
 
 ```
-##  Swab.162.7 Swab.162.26  Swab.162.6  Swab.162.1  Swab.162.2 Swab.162.27 
-##         115         129         135         145         151         163 
-## Swab.162.31  Swab.162.3  Swab.162.5 Swab.162.22  Swab.162.8 Swab.162.25 
-##         163         164         184         187         190         201 
-##  Swab.162.4 Swab.162.35 Swab.162.30 Swab.162.29 Swab.162.38 Swab.162.23 
-##         206         214         217         219         221         223 
-## Swab.162.19 Swab.162.32 Swab.162.51 Swab.162.42 Swab.162.36 Swab.162.34 
-##         233         248         249         279         280         283 
-## Swab.162.28 Swab.162.10 Swab.162.41 Swab.162.17 Swab.162.18 Swab.162.58 
-##         283         297         298         304         304         308 
-## Swab.162.40 Swab.162.21 Swab.162.33 Swab.162.57 Swab.162.59 Swab.162.45 
-##         312         315         321         322         324         325 
-## Swab.162.44  Swab.162.9 Swab.162.43 Swab.162.37 Swab.162.12 Swab.162.46 
-##         329         332         332         337         354         355 
-## Swab.162.20 Swab.162.49 Swab.162.24 Swab.162.39 Swab.162.14 Swab.162.15 
-##         356         358         366         371         378         378 
-## Swab.162.50 Swab.162.56 Swab.162.55 Swab.162.47 Swab.162.13 Swab.162.54 
-##         388         390         396         398         420         421 
-## Swab.162.60 Swab.162.11 Swab.162.48 Swab.162.52 Swab.162.53 Swab.162.16 
-##         437         455         482         495         511         552
+ Swab.162.7 Swab.162.26  Swab.162.6  Swab.162.1  Swab.162.2 Swab.162.27 
+        115         129         135         145         151         163 
+Swab.162.60 Swab.162.11 Swab.162.48 Swab.162.52 Swab.162.53 Swab.162.16 
+        437         455         482         495         511         552 
 ```
 
 
@@ -327,20 +311,20 @@ mantel(distCanberra, distSpatial)
 ```
 
 ```
-## 
-## Mantel statistic based on Pearson's product-moment correlation 
-## 
-## Call:
-## mantel(xdis = distCanberra, ydis = distSpatial) 
-## 
-## Mantel statistic r: -0.0401 
-##       Significance: 0.83 
-## 
-## Upper quantiles of permutations (null model):
-##    90%    95%  97.5%    99% 
-## 0.0620 0.0765 0.0905 0.1051 
-## 
-## Based on 999 permutations
+
+Mantel statistic based on Pearson's product-moment correlation 
+
+Call:
+mantel(xdis = distCanberra, ydis = distSpatial) 
+
+Mantel statistic r: -0.0401 
+      Significance: 0.83 
+
+Upper quantiles of permutations (null model):
+   90%    95%  97.5%    99% 
+0.0620 0.0765 0.0905 0.1051 
+
+Based on 999 permutations
 ```
 
 
@@ -363,7 +347,7 @@ testMantel(chair)$signif
 ```
 
 ```
-## [1] 0.326
+[1] 0.326
 ```
 
 ```r
@@ -371,7 +355,7 @@ testMantel(wall)$signif
 ```
 
 ```
-## [1] 0.63
+[1] 0.63
 ```
 
 ```r
@@ -379,7 +363,7 @@ testMantel(desk)$signif
 ```
 
 ```
-## [1] 0.193
+[1] 0.193
 ```
 
 ```r
@@ -387,7 +371,7 @@ testMantel(floor)$signif
 ```
 
 ```
-## [1] 0.806
+[1] 0.806
 ```
 
 

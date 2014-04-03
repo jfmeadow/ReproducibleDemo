@@ -113,8 +113,8 @@ dim(surfaceTaxa)
 
 Add up observations in each sample. For analysis like this, we should rarefy to even sampling depth so some samples are not biased just by having more or fewer observations. 
 
-```{r checkSampleSum}
-sort(rowSums(surfaceTable), decreasing=FALSE)
+```{r checkSampleSum, comment=''}
+c(head(sort(rowSums(surfaceTable))), tail(sort(rowSums(surfaceTable))))
 ```
 
 It looks like we can cut them all off at 100 sequences, and not lose any samples to rarefaction. The other nice thing is that the counts in each cell double as percent counts.
@@ -204,7 +204,7 @@ Yes - quite significant. So there is one reasonably strong result, but the R^2 v
 
 So we should check for a quasi-distance-decay relationship. This is the sort of pattern we see in just about every ecosystem with most forms of life. We even found this to be a stong predictor in the dust sampled from the [entire building](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0087093). So we can use the x and y coordinates as a map of samples, and then calculate the Euclidean pairwise distance between all samples. Then that goes through a mantel test to determine if these distance are correlated with the community distances. There is not a convenient table output for the `mantel` function, so it goes to standard output. 
 
-```{r spatialMantel}
+```{r spatialMantel, comment=''}
 distSpatial <- dist(data.frame(map$xcoor, map$ycoor))
 mantel(distCanberra, distSpatial)
 ```
@@ -212,7 +212,7 @@ mantel(distCanberra, distSpatial)
 No - not even close. So proximity to other samples doesn't matter. But we are testing this with all sample types together. Is it still unimportant if each sample type is considered independently?
 
 
-```{r testMantelTypes}
+```{r testMantelTypes, comment=''}
 chair <- which(map$SurfaceType == 'chair')
 wall <- which(map$SurfaceType == 'wall')
 desk <- which(map$SurfaceType == 'desk')
