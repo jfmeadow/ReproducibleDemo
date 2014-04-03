@@ -150,31 +150,13 @@ All of the row names in the mapping file also match with the row names of the OT
 
 ```r
 dim(surfaceTaxa)
-```
-
-```
-## [1] 1675    7
-```
-
-```r
 surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', 
                                    surfaceTaxa$Family)), ]
 surfaceTaxa <- surfaceTaxa[-c(grep('Chloroplast', 
                                    surfaceTaxa$Class)), ]
 surfaceTable <- surfaceTable[, row.names(surfaceTaxa)]
 identical(row.names(surfaceTaxa), colnames(surfaceTable))
-```
-
-```
-## [1] TRUE
-```
-
-```r
 dim(surfaceTaxa)
-```
-
-```
-## [1] 1635    7
 ```
 
 
@@ -189,26 +171,26 @@ sort(rowSums(surfaceTable), decreasing=FALSE)
 ```
 
 ```
-##  Swab.162.1  Swab.162.2  Swab.162.7  Swab.162.3  Swab.162.6 Swab.162.26 
-##          54          80         107         109         120         121 
-## Swab.162.31 Swab.162.38 Swab.162.43 Swab.162.27  Swab.162.5  Swab.162.4 
-##         125         133         137         159         175         176 
-## Swab.162.22  Swab.162.8 Swab.162.25 Swab.162.19 Swab.162.23 Swab.162.35 
-##         184         187         188         193         195         200 
-## Swab.162.30 Swab.162.29 Swab.162.32 Swab.162.42 Swab.162.58 Swab.162.51 
-##         207         208         230         236         240         241 
-## Swab.162.18 Swab.162.59 Swab.162.17 Swab.162.28 Swab.162.56 Swab.162.34 
-##         251         259         260         265         265         267 
-## Swab.162.41 Swab.162.10 Swab.162.36 Swab.162.40 Swab.162.49 Swab.162.57 
-##         269         270         275         276         286         290 
-## Swab.162.33 Swab.162.21 Swab.162.37 Swab.162.45 Swab.162.44 Swab.162.47 
-##         299         306         307         321         321         326 
-##  Swab.162.9 Swab.162.46 Swab.162.24 Swab.162.55 Swab.162.39 Swab.162.20 
-##         329         334         340         346         349         351 
-## Swab.162.12 Swab.162.11 Swab.162.60 Swab.162.50 Swab.162.15 Swab.162.54 
-##         353         361         367         371         371         371 
-## Swab.162.14 Swab.162.13 Swab.162.52 Swab.162.48 Swab.162.53 Swab.162.16 
-##         372         397         457         459         469         542
+##  Swab.162.7 Swab.162.26  Swab.162.6  Swab.162.1  Swab.162.2 Swab.162.27 
+##         115         129         135         145         151         163 
+## Swab.162.31  Swab.162.3  Swab.162.5 Swab.162.22  Swab.162.8 Swab.162.25 
+##         163         164         184         187         190         201 
+##  Swab.162.4 Swab.162.35 Swab.162.30 Swab.162.29 Swab.162.38 Swab.162.23 
+##         206         214         217         219         221         223 
+## Swab.162.19 Swab.162.32 Swab.162.51 Swab.162.42 Swab.162.36 Swab.162.34 
+##         233         248         249         279         280         283 
+## Swab.162.28 Swab.162.10 Swab.162.41 Swab.162.17 Swab.162.18 Swab.162.58 
+##         283         297         298         304         304         308 
+## Swab.162.40 Swab.162.21 Swab.162.33 Swab.162.57 Swab.162.59 Swab.162.45 
+##         312         315         321         322         324         325 
+## Swab.162.44  Swab.162.9 Swab.162.43 Swab.162.37 Swab.162.12 Swab.162.46 
+##         329         332         332         337         354         355 
+## Swab.162.20 Swab.162.49 Swab.162.24 Swab.162.39 Swab.162.14 Swab.162.15 
+##         356         358         366         371         378         378 
+## Swab.162.50 Swab.162.56 Swab.162.55 Swab.162.47 Swab.162.13 Swab.162.54 
+##         388         390         396         398         420         421 
+## Swab.162.60 Swab.162.11 Swab.162.48 Swab.162.52 Swab.162.53 Swab.162.16 
+##         437         455         482         495         511         552
 ```
 
 
@@ -268,7 +250,7 @@ dim(taxa)
 ```
 
 ```
-## [1] 966   7
+## [1] 916   7
 ```
 
 
@@ -277,14 +259,14 @@ dim(taxa)
 kable(data.frame(head(taxa)[, c(2, 5:7)]))
 ```
 
-|id       |Phylum          |Family              |Genus          |Species   |
-|:--------|:---------------|:-------------------|:--------------|:---------|
-|838843   |Proteobacteria  |Acetobacteraceae    |-              |-         |
-|259732   |Proteobacteria  |Caulobacteraceae    |Brevundimonas  |diminuta  |
-|127012   |Bacteroidetes   |Cytophagaceae       |Hymenobacter   |-         |
-|4375688  |Proteobacteria  |Campylobacteraceae  |Campylobacter  |-         |
-|4444760  |Actinobacteria  |Micrococcaceae      |-              |-         |
-|4361074  |Proteobacteria  |Acetobacteraceae    |-              |-         |
+|id       |Phylum          |Family              |Genus           |Species   |
+|:--------|:---------------|:-------------------|:---------------|:---------|
+|838843   |Proteobacteria  |Acetobacteraceae    |-               |-         |
+|259732   |Proteobacteria  |Caulobacteraceae    |Brevundimonas   |diminuta  |
+|127012   |Bacteroidetes   |Cytophagaceae       |Hymenobacter    |-         |
+|4375688  |Proteobacteria  |Campylobacteraceae  |Campylobacter   |-         |
+|4444760  |Actinobacteria  |Micrococcaceae      |-               |-         |
+|829373   |Actinobacteria  |Pseudonocardiaceae  |Pseudonocardia  |-         |
 
 ### Analysis
 
@@ -329,9 +311,9 @@ kable(surfaceTypeModel)
 
 |id               |  Df|  SumsOfSqs|  MeanSqs|  F.Model|      R2|  Pr(>F)|
 |:----------------|---:|----------:|--------:|--------:|-------:|-------:|
-|map$SurfaceType  |   3|      2.135|   0.7117|    1.797|  0.0908|   0.001|
-|Residuals        |  54|     21.389|   0.3961|       NA|  0.9092|      NA|
-|Total            |  57|     23.524|       NA|       NA|  1.0000|      NA|
+|map$SurfaceType  |   3|      2.124|   0.7080|    1.766|  0.0864|   0.001|
+|Residuals        |  56|     22.445|   0.4008|       NA|  0.9136|      NA|
+|Total            |  59|     24.569|       NA|       NA|  1.0000|      NA|
 
 
 Yes - quite significant. So there is one reasonably strong result, but the R^2 value is pretty weak. That tells us that sample type certainly matters, but there is still lots of variability that cannot be explained just by that factor. 
@@ -351,12 +333,12 @@ mantel(distCanberra, distSpatial)
 ## Call:
 ## mantel(xdis = distCanberra, ydis = distSpatial) 
 ## 
-## Mantel statistic r: 0.00237 
-##       Significance: 0.46 
+## Mantel statistic r: -0.0401 
+##       Significance: 0.83 
 ## 
 ## Upper quantiles of permutations (null model):
 ##    90%    95%  97.5%    99% 
-## 0.0618 0.0788 0.0896 0.1187 
+## 0.0620 0.0765 0.0905 0.1051 
 ## 
 ## Based on 999 permutations
 ```
@@ -381,7 +363,7 @@ testMantel(chair)$signif
 ```
 
 ```
-## [1] 0.136
+## [1] 0.326
 ```
 
 ```r
@@ -389,7 +371,7 @@ testMantel(wall)$signif
 ```
 
 ```
-## [1] 0.937
+## [1] 0.63
 ```
 
 ```r
@@ -397,7 +379,7 @@ testMantel(desk)$signif
 ```
 
 ```
-## [1] 0.062
+## [1] 0.193
 ```
 
 ```r
@@ -405,10 +387,43 @@ testMantel(floor)$signif
 ```
 
 ```
-## [1] 0.615
+## [1] 0.806
 ```
+
 
 
 No. Not for any of the four surfaces. 
 
 So it looks like the type of surface, potentially as a proxy for human contact, explains a significant amount of variation, in the microbial communities on those surfaces, but their proximity to each other around the room doesn't matter at all. 
+
+
+Here is a table of the most abundant taxa we found in the study: 
+
+
+```r
+mostAbu <- names(sort(colSums(tab), TRUE)[1])
+```
+
+
+
+```r
+tops <- names(sort(colSums(tab), decreasing=TRUE)[1:5])
+topTaxa <- taxa[tops, c(2, 5:7)]
+topTaxa$RelAbu <- colSums(tab)[tops]/sum(tab)*100
+kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
+```
+
+|id       |Phylum          |Family              |Genus            |Species  |  RelAbu|
+|:--------|:---------------|:-------------------|:----------------|:--------|-------:|
+|4386317  |Cyanobacteria   |-                   |-                |-        |   2.783|
+|1132020  |Cyanobacteria   |-                   |-                |-        |   2.550|
+|4410245  |Proteobacteria  |mitochondria        |-                |-        |   2.483|
+|505954   |Cyanobacteria   |Xenococcaceae       |-                |-        |   2.450|
+|359689   |Actinobacteria  |Corynebacteriaceae  |Corynebacterium  |-        |   2.183|
+
+
+
+
+
+
+

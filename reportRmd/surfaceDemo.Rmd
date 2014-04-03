@@ -97,7 +97,7 @@ identical(sort(row.names(surfaceMap)), sort(row.names(surfaceTable)))
 All of the row names in the mapping file also match with the row names of the OTU table. So all of the samples are there, but they are not in the same order - notice the `sort` commands used above. 
 
 
-```{r removeUnwanted, echo=TRUE, eval=TRUE}
+```{r removeUnwanted, echo=TRUE, eval=FALSE}
 dim(surfaceTaxa)
 surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', 
                                    surfaceTaxa$Family)), ]
@@ -229,6 +229,27 @@ testMantel(desk)$signif
 testMantel(floor)$signif
 ```
 
+
 No. Not for any of the four surfaces. 
 
 So it looks like the type of surface, potentially as a proxy for human contact, explains a significant amount of variation, in the microbial communities on those surfaces, but their proximity to each other around the room doesn't matter at all. 
+
+
+Here is a table of the most abundant taxa we found in the study: 
+
+```{r mostAbundantOTU}
+mostAbu <- names(sort(colSums(tab), TRUE)[1])
+```
+
+```{r mostAbundant, results='asis', }
+tops <- names(sort(colSums(tab), decreasing=TRUE)[1:5])
+topTaxa <- taxa[tops, c(2, 5:7)]
+topTaxa$RelAbu <- colSums(tab)[tops]/sum(tab)*100
+kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
+```
+
+
+
+
+
+
