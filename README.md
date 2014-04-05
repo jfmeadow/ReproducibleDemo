@@ -28,8 +28,9 @@ This whole demo can be downloaded here: [https://github.com/jfmeadow/Reproducibl
 * MacQIIME: Only necessary if you desire to also reproduce sequence processing steps. If you do not install QIIME or MacQIIME, just skip this step and go straight to RStudio for analysis. If you use QIIME through a server, on Linux, or through a virtual box, you will have to edit the `pickTheseOTUs.sh` script to point to your GreenGenes resources. Install MacQIIME here: [http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)
 * phyloseq: a BioConductor package designed to gracefully bring QIIME data into R. This is not a CRAN package, so you'll need to run two lines of code in your R terminal: 
 
-       source("http://bioconductor.org/biocLite.R")
-       biocLite("phyloseq")
+        source("http://bioconductor.org/biocLite.R")
+        biocLite("phyloseq")
+       
 This will install the phyloseq package. When it asks you to update other dependencies, just say yes (`a`). If you want further info, see their pages here: [http://joey711.github.io/phyloseq/install](http://joey711.github.io/phyloseq/install)
 * knitr: This R package does the heavy lifting for integrating analysis, prose, figures, tables and whatnot into a single dynamic document. It is an R package, so it can be installed by using the standard R command: `install.packages('knitr')`
 * pandoc: Unbelievably useful and comprehensive software for converting from and to just about any document format. This demo will use pandoc to convert from markdown to MS Word (.docx), LaTeX (.tex), and .pdf using LaTeX engine. It will handle many many other formats quite well. Find and install it here: [http://johnmacfarlane.net/pandoc/](http://johnmacfarlane.net/pandoc/). A list of many examples can be found here: [http://johnmacfarlane.net/pandoc/demos.html](http://johnmacfarlane.net/pandoc/demos.html)
