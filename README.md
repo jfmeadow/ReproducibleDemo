@@ -32,6 +32,7 @@ This whole demo can be downloaded here: [https://github.com/jfmeadow/Reproducibl
         biocLite("phyloseq")
        
 This will install the phyloseq package. When it asks you to update other dependencies, just say yes (`a`). If you want further info, see their pages here: [http://joey711.github.io/phyloseq/install](http://joey711.github.io/phyloseq/install)
+
 * knitr: This R package does the heavy lifting for integrating analysis, prose, figures, tables and whatnot into a single dynamic document. It is an R package, so it can be installed by using the standard R command: `install.packages('knitr')`
 * pandoc: Unbelievably useful and comprehensive software for converting from and to just about any document format. This demo will use pandoc to convert from markdown to MS Word (.docx), LaTeX (.tex), and .pdf using LaTeX engine. It will handle many many other formats quite well. Find and install it here: [http://johnmacfarlane.net/pandoc/](http://johnmacfarlane.net/pandoc/). A list of many examples can be found here: [http://johnmacfarlane.net/pandoc/demos.html](http://johnmacfarlane.net/pandoc/demos.html)
 * Additional R packages: This demo uses a few common R packages. These are easy to install using the same `install.packages` command above: 
