@@ -1,4 +1,18 @@
-`r opts_chunk$set(cache=FALSE, echo=FALSE)`
+---
+output:
+  html_document:
+    keep_md: true
+  pdf_document:
+    highlight: tango
+    toc: yes
+---
+
+```{r config, echo=FALSE}
+library(knitr)
+opts_chunk$set(background='gray80', tidy=FALSE, cache=FALSE, 
+               keep_md=TRUE, fig.path='figure/', echo=FALSE)
+```
+
 
 # Bacterial communities on classroom surfaces
 

@@ -1,4 +1,18 @@
-`r opts_chunk$set(background='gray80', tidy=FALSE, cache=FALSE)`
+---
+output:
+  html_document:
+    keep_md: true
+  pdf_document:
+    highlight: tango
+    toc: yes
+---
+
+```{r config, echo=FALSE}
+library(knitr)
+opts_chunk$set(background='gray80', tidy=FALSE, cache=FALSE, keep_md=TRUE, fig.path='figure/')
+```
+
+
 
 # Bacterial communities on classroom surfaces
 
@@ -15,7 +29,7 @@ This sequence dataset was processed using QIIME 1.8 with a default MacQIIME inst
 
 ```
 # pick OTUs using the script in the QIIME folder. 
-./pickTheseOTUs
+./pickTheseOTUs.sh
 ```
 
 
@@ -31,11 +45,11 @@ Load `phyloseq` to handle QIIME output files, and `vegan` and `labdsv` for multi
 
 ```{r loadPackages, message=FALSE}
 # setwd('~/Dropbox/SLP_Teaching/reportRmd')
-require(knitr)
-require(phyloseq)
-require(vegan)
-require(labdsv)
-require(xtable)
+#library(knitr)
+library(phyloseq)
+library(vegan)
+library(labdsv)
+library(xtable)
 ```
 
 
@@ -97,7 +111,7 @@ identical(sort(row.names(surfaceMap)), sort(row.names(surfaceTable)))
 All of the row names in the mapping file also match with the row names of the OTU table. So all of the samples are there, but they are not in the same order - notice the `sort` commands used above. 
 
 
-```{r removeUnwanted, echo=TRUE, eval=FALSE}
+```{r removeUnwanted, echo=TRUE, eval=TRUE}
 dim(surfaceTaxa)
 surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', 
                                    surfaceTaxa$Family)), ]

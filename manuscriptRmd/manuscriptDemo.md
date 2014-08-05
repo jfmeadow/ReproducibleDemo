@@ -1,5 +1,7 @@
 
 
+
+
 # Bacterial communities on classroom surfaces
 
 ## Manuscript demo
@@ -19,23 +21,6 @@ The data used here are a small subset (first 20,000 quality-filtered sequences) 
 This sequence dataset was processed using QIIME 1.8 [@qiime] with a default MacQIIME installation ([http://www.wernerlab.org/software/macqiime](http://www.wernerlab.org/software/macqiime)). Scripts for processing raw data are in the `../QIIME/` folder. To pick OTUs in that folder, you will execute the `pickTheseOTUs.sh` script sitting in that folder. This script wants to run MacQIIME, so if you are not using MacQIIME, you'll need to alter the top line to reflect your system. 
 
 For statistical analyses, we primiarily used the `phyloseq` package to handle QIIME output files, and `vegan` and `labdsv` for multivariate ecology stats [@phyloseq; @vegan; @labdsv]. All sequences were rarefied to an equal sampling depth (100 sequences per sample) prior to analysis. Beta-diversity was calculated using the Canberra taxonomic metric. The Canberra metric is defined as: $$ d_{jk} = \frac{1}{NZ} \sum \frac{x_{ij}-x_{ik}}{x_{ij}+x_{ik}} $$ where _NZ_ is the number of non-zero entries.  Reproducible documents were created with the `knitr` package in R [@knitr].
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -93,9 +78,7 @@ Out of a total 1.5923 &times; 10<sup>4</sup> sequences that passed quality filte
 \caption{Most abundant taxa across all surfaces.} 
 \end{table}
 
-
 ![Samples cluster by the type of surface.](figure/plotNMDS.png) 
-
 
 
 \begin{table}[ht]
@@ -113,13 +96,10 @@ map\$SurfaceType & 3 & 2.14 & 0.71 & 1.80 & 0.09 & 0.001 \\
 \end{table}
 
 
-
 We found that surface type explained a significant amount of community variation (p = 0.001; from PERMANOVA on Canberra distances). 
 
 
 Next, we tested for a quasi-distance-decay relationship. This is the sort of pattern we see in just about every ecosystem with most forms of life. We even found this to be a stong predictor in the dust sampled from the entire building [@KembelPLOS2014]. So we can use the x and y coordinates as a map of samples, and then calculate the Euclidean pairwise distance between all samples. Then that goes through a mantel test to determine if these distance are correlated with the community distances. 
-
-
 
 
 
