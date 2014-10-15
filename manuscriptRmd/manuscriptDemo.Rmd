@@ -1,11 +1,17 @@
 ---
+bibliography: surfaceDemo.bib
+csl: plos.csl
 output:
-  html_document:
-    keep_md: true
   pdf_document:
     highlight: tango
-    toc: yes
+    includes:
+      in_header: margins.sty
+    toc: no
+  html_document:
+    keep_md: yes
+  word_document: default
 ---
+
 
 ```{r config, echo=FALSE}
 library(knitr)
@@ -41,95 +47,94 @@ set.seed(42)
 ```
 
 ```{r loadPackages, message=FALSE}
-require(knitr)
-require(phyloseq)
-require(vegan)
-require(labdsv)
-require(xtable)
+library(biom)
+library(qiimer)
+library(vegan)
+library(labdsv)
+library(xtable)
 ```
 
 ```{r importPhyloseq}
-surfaceTablePhyloseq <- import_biom('../QIIME/otu_table.biom', 
-                                    parseFunction=parse_taxonomy_greengenes)
-surfaceMapPhyloseq <- import_qiime_sample_data('../QIIME/map.txt')
+rawBiom <- read_biom('../QIIME/otu_table.biom')
+surfaceTable.biom <- biom_raw_data(rawBiom)
+surfaceTable <- t(matrify(surfaceTable.biom))  # make long form 
 ```
 
+
 ```{r extractOTUtable}
-surfaceTable.tmp <- t(otu_table(surfaceTablePhyloseq))
-surfaceTable.tmp <- surfaceTable.tmp[!(row.names(surfaceTable.tmp) =='Swab.162.61'), ]
-surfaceTable <- as(surfaceTable.tmp, 'matrix')
-# surfaceTable[1:5, 1:5]
+surfaceTable <- surfaceTable[!(row.names(surfaceTable) =='Swab.162.61'), ]
 ```
 
 ```{r extractMap}
-surfaceMap <- data.frame(surfaceMapPhyloseq)[-1, ]
-# head(surfaceMap)
+surfaceMap <- read_qiime_mapping_file('../QIIME/map.txt')
+row.names(surfaceMap) <- surfaceMap$SampleID
 ```
 
-```{r extractTaxa}
-surfaceTaxa <- data.frame(tax_table(surfaceTablePhyloseq))
-for (i in 1:ncol(surfaceTaxa)) {
-  surfaceTaxa[, i] <- as.character(surfaceTaxa[, i])
-  surfaceTaxa[, i][is.na(surfaceTaxa[, i])] <- '-'
+
+```{r sortBySortID}
+surfaceMap$sortID <- as.character(surfaceMap$SampleID)
+for(i in 1:nrow(surfaceMap)) {
+  if(nchar(surfaceMap$sortID[i]) == 10) {
+    surfaceMap$sortID[i] <- gsub('162.', '162.0', surfaceMap$sortID[i])
   }
-# kable(data.frame(head(surfaceTaxa)[, c(2, 5:7)]))
+}
+surfaceMap <- surfaceMap[order(surfaceMap$sortID), ]
 ```
 
-```{r testTaxa}
-# identical(row.names(surfaceTaxa), colnames(surfaceTable))
+
+
+```{r qiimerTaxonomyIn, results='asis'}
+surfaceTaxa.list <- biom_taxonomy(rawBiom, attr='taxonomy')
+surfaceTaxa <- suppressWarnings(data.frame(do.call('rbind', surfaceTaxa.list)))
+names(surfaceTaxa) <- c('Kingdom', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species')
+
+for(i in 1:ncol(surfaceTaxa)) {
+  surfaceTaxa[, i] <- gsub('[[:alpha:]]{1}\\_\\_$', '--', surfaceTaxa[, i])
+  surfaceTaxa[, i] <- gsub('^[[:alpha:]]{1}\\_\\_', '', surfaceTaxa[, i])
+  }
 ```
 
-```{r testSampleID}
-# identical(sort(row.names(surfaceMap)), sort(row.names(surfaceTable)))
-```
+
 
 ```{r removeUnwanted, eval=TRUE}
-# dim(surfaceTaxa)
-surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', surfaceTaxa$Family)), ]
-surfaceTaxa <- surfaceTaxa[-c(grep('Chloroplast', surfaceTaxa$Class)), ]
-surfaceTable <- surfaceTable[, row.names(surfaceTaxa)]
-# identical(row.names(surfaceTaxa), colnames(surfaceTable))
-# dim(surfaceTaxa)
+surfaceTaxa <- surfaceTaxa[-c(grep('mitochondria', 
+                                   surfaceTaxa$Family)), ]
+surfaceTaxa <- surfaceTaxa[-c(grep('Chloroplast', 
+                                   surfaceTaxa$Class)), ]
 ```
 
-```{r checkSampleSum}
-# sort(rowSums(surfaceTable), decreasing=FALSE)
+
+```{r jiveOrder}
+surfaceTable <- surfaceTable[, row.names(surfaceTaxa)]
+surfaceTable <- surfaceTable[row.names(surfaceMap), ]
 ```
+
+
 
 ```{r rarefy100}
-surfaceTable <- surfaceTable[which(rowSums(surfaceTable) > 100), ]
-tab <- rrarefy(surfaceTable, 100)
+rrare <- 100
+surfaceTable <- surfaceTable[which(rowSums(surfaceTable) > rrare), ]
+tab <- rrarefy(surfaceTable, rrare)
+
+tab <- tab[, which(colSums(tab) > 0)]
+taxa <- surfaceTaxa[colnames(tab), ]
+
+map <- surfaceMap[row.names(tab), ]
+
 ```
 
 ```{r mapColors}
-map <- surfaceMap[row.names(tab), ]
 map$color <- 'wheat'
 map$color[map$SurfaceType == 'floor'] <- 'chocolate3'
 map$color[map$SurfaceType == 'chair'] <- 'darkslateblue'
 map$color[map$SurfaceType == 'desk'] <- 'goldenrod3'
-map$SurfaceType <- factor(map$SurfaceType, levels=c("wall", "floor",  "chair", "desk"))
+map$SurfaceType <- factor(map$SurfaceType, 
+                          levels=c("wall", "floor",  
+                                   "chair", "desk"))
 ```
 
-```{r sortBySortID}
-names(map)[1] <- gsub('X.', '', names(map)[1])
 
-map$sortID <- as.character(map$SampleID)
-for(i in 1:nrow(map)) {
-  if(nchar(map$sortID[i]) == 10) {
-    map$sortID[i] <- gsub('162.', '162.0', map$sortID[i])
-  }
-}
 
-map <- map[order(map$sortID), 
-           c('sortID', 'SurfaceType', 'xcoord', 'ycoord', 'color')]
-```
-
-```{r reconcileTable}
-tab <- tab[row.names(map), which(colSums(tab) > 0)]
-taxa <- surfaceTaxa[colnames(tab), ]
-# head(taxa)
-# dim(taxa)
-```
 
 
 ```{r createDistance}
@@ -142,21 +147,18 @@ nmdsCanberra <- bestnmds(distCanberra)
 
 ```{r mostAbundantOTU}
 mostAbu <- names(sort(colSums(tab), TRUE)[1])
-# taxa[mostAbu, ]
 ```
 
 ### Results
 
-Out of a total `r sum(surfaceTable)` sequences that passed quality filtering, we analyzed `r sum(tab)` sequences in `r nrow(tab)` samples distributed among `r ncol(tab)` OTUs (97% sequence similarity). The most abundant OTU in the dataset was a Cyanobacterium (`r round(100*(sum(tab[, mostAbu])/sum(tab)), 2)`% of all sequences). The most abundant taxa are shown in Table 1. \pagebreak
+Out of a total $`r sum(surfaceTable)`$ sequences that passed quality filtering, we analyzed `r sum(tab)` sequences in `r nrow(tab)` samples distributed among `r ncol(tab)` OTUs (97% sequence similarity). The most abundant OTU in the dataset was a Cyanobacterium (`r round(100*(sum(tab[, mostAbu])/sum(tab)), 2)`% of all sequences). The most abundant taxa are shown in Table 1. \pagebreak
 
 ```{r mostAbundant, results='asis', }
 tops <- names(sort(colSums(tab), decreasing=TRUE)[1:5])
 topTaxa <- taxa[tops, c(2, 5:7)]
 topTaxa$RelAbu <- colSums(tab)[tops]/sum(tab)*100
-# kable(topTaxa)  # quick way to make markdown tables that will convert to LaTeX
-print(xtable(topTaxa, 
-  caption='Most abundant taxa across all surfaces.'), 
-  comment=FALSE, timestamp=FALSE)  # a way to make better LaTeX tables with more options
+
+kable(topTaxa, caption='Most abundant taxa across all surfaces.')
 ```
 
 ```{r plotNMDS, fig.width=6, fig.height=5, dpi=100, fig.cap='Samples cluster by the type of surface.'}
@@ -170,11 +172,9 @@ legend(par()$usr[2], par()$usr[4], pch=21, pt.cex=1.5,
 
 ```{r surfaceTypeModel, results='asis'}
 surfaceTypeModel <- adonis(distCanberra ~ map$SurfaceType)$aov.tab
-# kable(surfaceTypeModel)  # good for markdown tables
-# the better way for latex tables
-print(xtable(surfaceTypeModel, digits=c(0, 0, 2, 2, 2, 2, 3),
-  caption='Surface type explains a significant amount of variation among communities.'), 
-  comment=FALSE, timestamp=FALSE) 
+
+kable(surfaceTypeModel, 
+      caption='Surface type explains a significant amount of variation among communities.')
 ```
 
 
@@ -216,6 +216,5 @@ So it looks like the type of surface, potentially as a proxy for human contact, 
 
 \clearpage
 
-----------------
 
 ### References

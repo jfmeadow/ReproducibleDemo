@@ -2,6 +2,7 @@
 
 
 
+
 # Bacterial communities on classroom surfaces
 
 ## Manuscript demo
@@ -58,42 +59,38 @@ For statistical analyses, we primiarily used the `phyloseq` package to handle QI
 
 
 
+
+
+
+
+
+
 ### Results
 
-Out of a total 1.5923 &times; 10<sup>4</sup> sequences that passed quality filtering, we analyzed 5800 sequences in 58 samples distributed among 966 OTUs (97% sequence similarity). The most abundant OTU in the dataset was a Cyanobacterium (2.67% of all sequences). The most abundant taxa are shown in Table 1. \pagebreak
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{rllllr}
-  \hline
- & Phylum & Family & Genus & Species & RelAbu \\ 
-  \hline
-505954 & Cyanobacteria & Xenococcaceae & - & - & 2.67 \\ 
-  1039477 & Firmicutes & Staphylococcaceae & Staphylococcus & epidermidis & 2.52 \\ 
-  4449609 & Proteobacteria & Sphingomonadaceae & Sphingomonas & - & 2.40 \\ 
-  359689 & Actinobacteria & Corynebacteriaceae & Corynebacterium & - & 2.16 \\ 
-  4482309 & Proteobacteria & Acetobacteraceae & - & - & 2.14 \\ 
-   \hline
-\end{tabular}
-\caption{Most abundant taxa across all surfaces.} 
-\end{table}
-
-![Samples cluster by the type of surface.](figure/plotNMDS.png) 
+Out of a total $1.5923\times 10^{4}$ sequences that passed quality filtering, we analyzed 5800 sequences in 58 samples distributed among 964 OTUs (97% sequence similarity). The most abundant OTU in the dataset was a Cyanobacterium (3.14% of all sequences). The most abundant taxa are shown in Table 1. \pagebreak
 
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{lrrrrrr}
-  \hline
- & Df & SumsOfSqs & MeanSqs & F.Model & R2 & Pr($>$F) \\ 
-  \hline
-map\$SurfaceType & 3 & 2.14 & 0.71 & 1.80 & 0.09 & 0.001 \\ 
-  Residuals & 54 & 21.39 & 0.40 &  & 0.91 &  \\ 
-  Total & 57 & 23.52 &  &  & 1.00 &  \\ 
-   \hline
-\end{tabular}
-\caption{Surface type explains a significant amount of variation among communities.} 
-\end{table}
+Table: Most abundant taxa across all surfaces.
+
+          Phylum           Family                Genus              Species          RelAbu
+--------  ---------------  --------------------  -----------------  ------------  ---------
+505954    Cyanobacteria    Xenococcaceae         --                 --             3.137931
+4449609   Proteobacteria   Sphingomonadaceae     Sphingomonas       --             2.327586
+1039477   Firmicutes       Staphylococcaceae     Staphylococcus     epidermidis    2.155172
+359689    Actinobacteria   Corynebacteriaceae    Corynebacterium    --             2.017241
+134470    Firmicutes       Alicyclobacillaceae   Alicyclobacillus   --             1.965517
+
+![Samples cluster by the type of surface.](figure/plotNMDS-1.png) 
+
+
+
+Table: Surface type explains a significant amount of variation among communities.
+
+                   Df   SumsOfSqs     MeanSqs    F.Model          R2   Pr(>F)
+----------------  ---  ----------  ----------  ---------  ----------  -------
+map$SurfaceType     3    2.196251   0.7320836   1.848144   0.0931142    0.001
+Residuals          54   21.390385   0.3961182         NA   0.9068858       NA
+Total              57   23.586635          NA         NA   1.0000000       NA
 
 
 We found that surface type explained a significant amount of community variation (p = 0.001; from PERMANOVA on Canberra distances). 
@@ -105,7 +102,7 @@ Next, we tested for a quasi-distance-decay relationship. This is the sort of pat
 
 
 
-We did not find any significant coorelation between community similarity and spatial distance (p = 0.456; from Mantel test) when considering all samples together. Likewise, individual sample types tested alone showed no relationship with spatial distance (p > 0.1 for all four sample types). 
+We did not find any significant coorelation between community similarity and spatial distance (p = 0.653; from Mantel test) when considering all samples together. Likewise, individual sample types tested alone showed no relationship with spatial distance (p > 0.1 for all four sample types). 
 
 
 ### Discussion
@@ -115,6 +112,5 @@ So it looks like the type of surface, potentially as a proxy for human contact, 
 
 \clearpage
 
-----------------
 
 ### References
