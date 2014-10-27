@@ -90,49 +90,49 @@ mkdir otus
 
 # group identical seqs - this is the timesaver
 pick_otus.py --enable_rev_strand_match -m prefix_suffix -p 5000 -u 0 -i seqs.fna -o prefix_picked_otus
-echo '\nfinished prefix picking...\n'
+echo -e '\nfinished prefix picking...\n'
 
 # pull representatives for otu picking
 pick_rep_set.py -i prefix_picked_otus/seqs_otus.txt -f seqs.fna -o prefix_picked_otus/rep_set.fasta
-echo 'finished picking prefix rep set...\n'
-echo 'this next step will take a few minutes...\n'
+echo -e 'finished picking prefix rep set...\n'
+echo -e 'this next step will take a few minutes...\n'
 
 # slow picking at 97% against GreenGenes
 pick_otus.py --enable_rev_strand_match -m uclust_ref -r $reference_seqs -C -i prefix_picked_otus/rep_set.fasta -o prefix_picked_otus/uclust_picked_otus/
-echo 'finished uclust OTU picking...\n'
+echo -e 'finished uclust OTU picking...\n'
 
 # put the otu maps back together
 merge_otu_maps.py -i prefix_picked_otus/seqs_otus.txt,prefix_picked_otus/uclust_picked_otus/rep_set_otus.txt -o otus/otus.txt
-echo 'finished merging maps...\n'
+echo -e 'finished merging maps...\n'
 
 # Pick final rep set from greengenes reference sequences
 pick_rep_set.py -i otus/otus.txt -f seqs.fna -o otus/final_rep_set.fasta -r $reference_seqs  
-echo 'finished picking final rep set...\n'
+echo -e 'finished picking final rep set...\n'
 
 # assign taxonomy using GreenGenes
 assign_taxonomy.py -i otus/final_rep_set.fasta -r $reference_seqs -t $reference_tax
-echo 'finished assigning taxonomy...\n'
+echo -e 'finished assigning taxonomy...\n'
 
 # make an otu table. 
 make_otu_table.py -i otus/otus.txt -t uclust_assigned_taxonomy/final_rep_set_tax_assignments.txt -o otu_table.biom
-echo 'finished making OTU table...\n'
+echo -e 'finished making OTU table...\n'
 
 # add metadata to mapping file
 mkdir otu_table_metadata
 biom add-metadata -i otu_table.biom -o otu_table_metadata/otu_table_metadata.biom -m map.txt
-echo 'finished adding metadata to OTU table...\n'
+echo -e 'finished adding metadata to OTU table...\n'
 
 # summarize the final otu table. 
 biom summarize-table -i otu_table.biom -o otu_table_stats.txt
 
 # Add total number of sequences to the bottom of this new file
-echo '\n-----------------------------\n' >> otu_table_stats.txt
-echo 'this many sequences were in the original "seq.fna" file:' >> otu_table_stats.txt
+echo -e '\n-----------------------------\n' >> otu_table_stats.txt
+echo -e 'this many sequences were in the original "seq.fna" file:' >> otu_table_stats.txt
 grep -c '>' seqs.fna >> otu_table_stats.txt
 
 # Then spit out the whole file to assess how things went. 
-echo '\nthese stats can be found in "otu_table_stats.txt":\n'
-echo '-----------------------------\n'
+echo -e '\nthese stats can be found in "otu_table_stats.txt":\n'
+echo -e '-----------------------------\n'
 head -n 1000 otu_table_stats.txt
-echo '\n-----------------------------\n'
+echo -e '\n-----------------------------\n'
 
